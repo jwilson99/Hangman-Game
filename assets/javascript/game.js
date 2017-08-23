@@ -5,17 +5,21 @@ var alphabet = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H',
 
 var pokemon = ['bulbasaur','charmander','squirtle','pikachu'];
 
+//show guesses
 var guesses = 5;
+window.onload = function() {
+    document.getElementById("guess").innerHTML = "Guesses left: ";
+}
 
 //Pick a random pokemon from a list as the word to guess
 var answer = pokemon[Math.floor(Math.random()*pokemon.length)];
 
 //create '_' placeholders in HTML document with the same number of characters as the pokemon
 var answerLength = answer.length;
-var underscore = '_ '.repeat(answerLength);
+var underscore = Array.from('_'.repeat(answerLength));
 
 window.onload = function() {
-    document.getElementById("answer").innerHTML = underscore;
+    document.getElementById("answer").innerHTML = underscore.join(' ');
 }
 
 //function runs when user presses a key
@@ -25,10 +29,15 @@ document.onkeyup = function(event) {
     var status = true;
     //limits guesses to alphabet letters
     if (alphabet.indexOf(userGuess) > -1) {
-        alert(userGuess);
+        guesses = guesses - 1;
         userGuessLower = userGuess.toLowerCase();
         if (answer.indexOf(userGuessLower) > -1) {
-            alert('yay');
+            for (var i = 0; i < answer.length; i++) {
+                if (answer[i] === userGuessLower) {
+                    underscore[i] = userGuessLower;
+                    document.getElementById("answer").innerHTML = underscore.join(' ');
+                }
+            }
         }
     }
     console.log(userGuess);
