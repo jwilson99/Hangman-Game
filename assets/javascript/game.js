@@ -5,7 +5,7 @@
 var alphabet = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H','i','I','j','J','k','K','l','L','m','M','n','N','o','O','p','P','q','Q','r','R','s','S','t','T','u','U','v','V','w','W','x','X','y','Y','z','Z'];
 
 //potential words to guess
-var pokemon = ['bulbasaur','charmander','squirtle','pikachu'];
+var pokemon = ['bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon', 'charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raticate', 'spearow', 'fearow', 'ekans', 'arbok', 'pikachu', 'raichu', 'sandshrew', 'sandslash', 'nidoran', 'nidorina', 'nidoqueen', 'nidorino', 'nidoking', 'clefairy', 'clefable', 'vulpix', 'ninetales', 'jigglypuff', 'wigglytuff', 'zubat', 'golbat', 'oddish', 'gloom', 'vileplume', 'paras', 'parasect', 'venonat', 'venomoth', 'diglett', 'dugtrio', 'meowth', 'persian', 'psyduck', 'golduck', 'mankey', 'primeape', 'growlithe', 'arcanine', 'poliwag', 'poliwhirl', 'poliwrath', 'abra', 'kadabra', 'alakazam', 'machop', 'machoke', 'machamp', 'bellsprout', 'weepinbell', 'victreebell', 'tentacool', 'tentacruel', 'geodude', 'graveler', 'golem', 'ponyta', 'rapidash', 'slowpoke', 'slowbro', 'magnemite', 'magneton', 'farfetchd', 'doduo', 'dodrio', 'seel', 'dewgong', 'grimer', 'muk', 'shellder', 'cloyster', 'gastly', 'haunter', 'gengar', 'onix', 'drowsee', 'hypno', 'krabby', 'kingler', 'voltorb', 'electrode', 'exeggcute', 'exeggutor', 'cubone', 'marowak', 'hitmonlee', 'hitmonchan', 'lickitung', 'koffing', 'weezing', 'rhyhorn', 'rhydon', 'chansey', 'tangela', 'kangaskhan', 'horsea', 'seadra', 'goldeen', 'seaking', 'staryu', 'starmie', 'mrmime', 'scyther', 'jynx', 'electabuzz', 'magmar', 'pinsir', 'tauros', 'magikarp', 'gyarados', 'lapras', 'ditto', 'eevee', 'vaporeon', 'jolteon', 'flareon', 'porygon', 'omanyte', 'omastar', 'kabuto', 'kabutops', 'aerodactyl', 'snorlax', 'articuno', 'zapdos', 'moltres', 'dratini', 'dragonair', 'dragonite', 'mewtwo', 'mew'];
 
 //guesses left
 var guesses = 12;
@@ -86,40 +86,12 @@ document.onkeyup = function(event) {
             }
         }
     }
-    //checks to see if the answer has been fully guessed by comparing the underscore value to the answer
-    if (underscore.join('') === answer) {
+    //game over function for both wins and losses
+    function gameOver() {
+        //replaces pokemon image with an image of the last pokemon
+        document.getElementById('pokemonimg').src = "assets/images/"+answer+".png"
 
-        //updates win count if underscore is equal to the answer
-        wins = wins + 1;
-
-        document.getElementById("wins").innerHTML = "Wins: " + wins;
-
-        //resets the random pokemon selection for the next round after a win
-         answer = pokemon[Math.floor(Math.random()*pokemon.length)];
-
-        answerLength = answer.length;
-
-        underscore = Array.from('_'.repeat(answerLength));
-
-        document.getElementById("answer").innerHTML = underscore.join(' ');
-
-        //resets letters guessed after a win
-        letterGuess = [];
-        document.getElementById("lettersGuessed").innerHTML = "Letters guessed: " + letterGuess;
-
-        //resets guesses after a win
-        guesses = 12;
-
-        document.getElementById("guessCount").innerHTML = "Guesses left: " + guesses;
-
-    }
-    if (guesses === 0) {
-        //updates losses by 1 when guesses equal 0
-        losses = losses + 1;
-
-        document.getElementById("losses").innerHTML = "Losses: " + losses;
-
-        //resets the random pokemon selection for the next round after a loss
+        //resets the random pokemon selection for the next round after win or loss
         answer = pokemon[Math.floor(Math.random()*pokemon.length)];
 
         answerLength = answer.length;
@@ -128,14 +100,42 @@ document.onkeyup = function(event) {
 
         document.getElementById("answer").innerHTML = underscore.join(' ');
 
-        //resets letters guessed after a loss
+        //resets letters guessed after a win or loss
         letterGuess = [];
         document.getElementById("lettersGuessed").innerHTML = "Letters guessed: " + letterGuess;
 
-        //resets guesses after a loss
+        //resets guesses after a win or loss
         guesses = 12;
 
         document.getElementById("guessCount").innerHTML = "Guesses left: " + guesses;
+    }
+
+    //checks to see if the answer has been fully guessed by comparing the underscore value to the answer
+    if (underscore.join('') === answer) {
+
+        //updates win count if underscore is equal to the answer
+        wins = wins + 1;
+
+        document.getElementById("wins").innerHTML = "Wins: " + wins;
+
+        //announces a win with the answer
+        document.getElementById("whosthatpokemon").innerHTML = "You win! It's " + answer.toUpperCase()+"!";
+
+        //game reset
+        gameOver();
+
+    }
+    if (guesses === 0) {
+        //updates losses by 1 when guesses equal 0
+        losses = losses + 1;
+
+        document.getElementById("losses").innerHTML = "Losses: " + losses;
+
+        //announces a loss with the answer
+        document.getElementById("whosthatpokemon").innerHTML = "You lose! It's " + answer.toUpperCase()+"!";
+
+        //game reset
+        gameOver()
     }
 }
 

@@ -14,14 +14,31 @@
     <script type="text/javascript" src="assets/javascript/game.js"></script>
 </head>
 <body>
-    <h1>Pokemon* Hangman</h1>
-    <p>*This is not an official Pokemon site.</p>
-    <p>Press any key to get started</p>
-    <p id="wins">Wins: 0</p>
-    <p id="losses">Losses: 0</p>
-    <p id="guessCount"></p>
-    <p>Who's that pokemon?</p>
-    <p id="answer"></p>
-    <p id="lettersGuessed"></p>
+    <header class="container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 center" id="header">
+        <h1>
+            <img src="assets/images/pokemon.png" class="img-responsive">
+        </h1>
+        <h1>Pokemon Hangman Game!</h1>
+    </header>
+
+    <div class="container col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <h3>Press any key to get started</h3>
+        <p id="wins">Wins: 0</p>
+        <p id="losses">Losses: 0</p>
+        <p id="guessCount"></p>
+        <p>Who's that pokemon?</p>
+        <p id="answer"></p>
+    </div>
+    <div class="container col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <h2 class="center" id="whosthatpokemon">
+            Who's that pokemon?
+        </h2>
+        <div>
+            <img src="assets/images/whosthatpokemon.png" class="img-responsive" id="pokemonimg">
+        </div>
+    </div>
+    <div class="container col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h3 id="lettersGuessed"></h3>
+    </div>
 </body>
 </html>

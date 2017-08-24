@@ -1,0 +1,9 @@
+.center {
+    text-align: center;
+}
+
+#header {
+    background-color: gold;
+    border: 10px solid steelblue;
+    color: steelblue;
+}
