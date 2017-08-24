@@ -89,7 +89,7 @@ document.onkeyup = function(event) {
     //game over function for both wins and losses
     function gameOver() {
         //replaces pokemon image with an image of the last pokemon
-        document.getElementById('pokemonimg').src = "assets/images/"+answer+".png"
+        document.getElementById('pokemonimg').src = "assets/images/"+answer+".png";
 
         //resets the random pokemon selection for the next round after win or loss
         answer = pokemon[Math.floor(Math.random()*pokemon.length)];

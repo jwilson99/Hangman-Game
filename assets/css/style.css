@@ -7,3 +7,7 @@
     border: 10px solid steelblue;
     color: steelblue;
 }
+
+.img-responsive {
+    margin: 0 auto;
+}
