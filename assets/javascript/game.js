@@ -8,7 +8,7 @@ var alphabet = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H',
 var pokemon = ['bulbasaur','charmander','squirtle','pikachu'];
 
 //guesses left
-var guesses = 5;
+var guesses = 12;
 
 //number of wins
 var wins = 0;
@@ -52,9 +52,19 @@ document.onkeyup = function(event) {
         //converts userGuess to lower case
         userGuessLower = userGuess.toLowerCase();
 
+        if (answer.indexOf(userGuessLower) < 0) {
+
+            if (letterGuess.indexOf(userGuessLower) < 0) {
+
+                guesses = guesses - 1;
+
+                document.getElementById("guessCount").innerHTML = "Guesses left: " + guesses;
+            }
+        }
+
         //appends userGuess to lettersGuessed array and updates document
-        if (letterGuess.indexOf(userGuess) < 0) {
-            letterGuess.push(userGuess);
+        if (letterGuess.indexOf(userGuessLower) < 0) {
+            letterGuess.push(userGuessLower);
 
             document.getElementById("lettersGuessed").innerHTML = "Letters guessed: " + letterGuess;
         }
@@ -66,6 +76,8 @@ document.onkeyup = function(event) {
             for (var i = 0; i < answer.length; i++) {
 
                 if (answer[i] === userGuessLower) {
+
+                    //updates underscore with letter at correct location
                     underscore[i] = userGuessLower;
 
                     //updates the document by replacing underscores with correct letter guesses
@@ -95,6 +107,35 @@ document.onkeyup = function(event) {
         letterGuess = [];
         document.getElementById("lettersGuessed").innerHTML = "Letters guessed: " + letterGuess;
 
+        //resets guesses after a win
+        guesses = 12;
+
+        document.getElementById("guessCount").innerHTML = "Guesses left: " + guesses;
+
+    }
+    if (guesses === 0) {
+        //updates losses by 1 when guesses equal 0
+        losses = losses + 1;
+
+        document.getElementById("losses").innerHTML = "Losses: " + losses;
+
+        //resets the random pokemon selection for the next round after a loss
+        answer = pokemon[Math.floor(Math.random()*pokemon.length)];
+
+        answerLength = answer.length;
+
+        underscore = Array.from('_'.repeat(answerLength));
+
+        document.getElementById("answer").innerHTML = underscore.join(' ');
+
+        //resets letters guessed after a loss
+        letterGuess = [];
+        document.getElementById("lettersGuessed").innerHTML = "Letters guessed: " + letterGuess;
+
+        //resets guesses after a loss
+        guesses = 12;
+
+        document.getElementById("guessCount").innerHTML = "Guesses left: " + guesses;
     }
 }
 
