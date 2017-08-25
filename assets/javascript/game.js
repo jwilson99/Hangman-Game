@@ -41,54 +41,55 @@ window.onload = function() {
 
     //shows who's that pokemon? header
     document.getElementById("whosthatpokemon").innerHTML = "Who's that pokemon?";
-
-    //hide play again button
-    // document.getElementById("playagain").style.visibility = 'hidden';
 }
 
 //function runs when user presses a key
 document.onkeyup = function(event) {
+    if (guesses === 0 || underscore.join('') === answer){
+    //    nothing
+    }
+    else {
+        //userGuess is recorded based on key pressed
+        var userGuess = event.key;
 
-    //userGuess is recorded based on key pressed
-    var userGuess = event.key;
+        //limits guesses to alphabet letters
+        if (alphabet.indexOf(userGuess) > -1) {
 
-    //limits guesses to alphabet letters
-    if (alphabet.indexOf(userGuess) > -1) {
+            //converts userGuess to lower case
+            userGuessLower = userGuess.toLowerCase();
 
-        //converts userGuess to lower case
-        userGuessLower = userGuess.toLowerCase();
+            if (answer.indexOf(userGuessLower) < 0) {
 
-        if (answer.indexOf(userGuessLower) < 0) {
+                if (letterGuess.indexOf(userGuessLower) < 0) {
 
-            if (letterGuess.indexOf(userGuessLower) < 0) {
+                    guesses = guesses - 1;
 
-                guesses = guesses - 1;
-
-                document.getElementById("guessCount").innerHTML = "Guesses left: " + guesses;
+                    document.getElementById("guessCount").innerHTML = "Guesses left: " + guesses;
+                }
             }
-        }
 
-        //appends userGuess to lettersGuessed array and updates document
-        if (letterGuess.indexOf(userGuessLower) < 0) {
-            letterGuess.push(userGuessLower);
+            //appends userGuess to lettersGuessed array and updates document
+            if (letterGuess.indexOf(userGuessLower) < 0) {
+                letterGuess.push(userGuessLower);
 
-            document.getElementById("lettersGuessed").innerHTML = "Letters guessed: " + letterGuess;
-        }
+                document.getElementById("lettersGuessed").innerHTML = "Letters guessed: " + letterGuess;
+            }
 
-        //checks to see if the guess is part of the answer
-        if (answer.indexOf(userGuessLower) > -1) {
+            //checks to see if the guess is part of the answer
+            if (answer.indexOf(userGuessLower) > -1) {
 
-            //cycles through the answer to find locations matching the user guess
-            for (var i = 0; i < answer.length; i++) {
+                //cycles through the answer to find locations matching the user guess
+                for (var i = 0; i < answer.length; i++) {
 
-                if (answer[i] === userGuessLower) {
+                    if (answer[i] === userGuessLower) {
 
-                    //updates underscore with letter at correct location
-                    underscore[i] = userGuessLower;
+                        //updates underscore with letter at correct location
+                        underscore[i] = userGuessLower;
 
-                    //updates the document by replacing underscores with correct letter guesses
-                    document.getElementById("answer").innerHTML = underscore.join(' ');
+                        //updates the document by replacing underscores with correct letter guesses
+                        document.getElementById("answer").innerHTML = underscore.join(' ');
                     }
+                }
             }
         }
     }
@@ -130,6 +131,14 @@ document.onkeyup = function(event) {
 
         //show button
         document.getElementById("playagain").style.visibility = 'visible';
+
+        //resets blank underscores
+        underscore = "_ _ _ _ _";
+
+        document.getElementById("answer").innerHTML = underscore.join(' ');
+
+        //remove key event listener
+        document.onkeyup = null;
     }
 
     //checks to see if the answer has been fully guessed by comparing the underscore value to the answer
