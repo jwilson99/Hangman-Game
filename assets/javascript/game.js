@@ -97,7 +97,7 @@ document.onkeyup = function(event) {
     //button function
     document.getElementById("playagain").onclick = function() {
         //resets music
-        document.getElementById("audio").innerHTML = "<audio autoplay> <source src='assets/music/game.mp3' type='audio/mpeg'></audio>";
+        document.getElementById("audio").innerHTML = "<audio autoplay loop> <source src='assets/music/game.mp3' type='audio/mpeg'></audio>";
 
         //resets the random pokemon selection for the next round after win or loss
         answer = pokemon[Math.floor(Math.random()*pokemon.length)];
@@ -122,6 +122,9 @@ document.onkeyup = function(event) {
 
         //replaces pokemon image with who's that pokemon
         document.getElementById('pokemonimg').src = "assets/images/whosthatpokemon.gif";
+
+        //resets who's that pokemon text
+        document.getElementById("whosthatpokemon").innerHTML = "Who's that pokemon?";
     }
 
     //game over function for both wins and losses
