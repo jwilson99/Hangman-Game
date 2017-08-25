@@ -5,44 +5,59 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <title>Pokemon Hangman</title>
+    <!--Link to reset stylesheet-->
     <link type="text/css" rel="stylesheet" href="assets/css/reset.css">
 
     <!-- Boostrap CDN-Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    <!--Link to custom stylesheet-->
     <link type="text/css" rel="stylesheet" href="assets/css/style.css">
+
+    <!--Link to javascript-->
     <script type="text/javascript" src="assets/javascript/game.js"></script>
 </head>
 <body>
+    <!--Big Pokemon header, always full width-->
     <header class="container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 center" id="header">
         <h1>
-            <img src="assets/images/pokemon.png" class="img-responsive">
+            <!--Pokemon logo image changes size with viewport-->
+            <img src="assets/images/pokemon.png" class="img-responsive" id="headimg">
         </h1>
         <h1>Pokemon Hangman Game!</h1>
     </header>
 
+    <!--Left text area always half screen-->
     <div class="container col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-        <h3>Press any key to get started</h3>
+        <p>Press any key to get started</p>
         <p id="wins">Wins: 0</p>
         <p id="losses">Losses: 0</p>
-        <p id="guessCount"></p>
+        <p id="guessCount">Guesses left: 12</p>
         <p>Who's that pokemon?</p>
-        <p id="answer"></p>
+        <p id="answer">_ _ _ _ _</p>
+        <button class="btn btn-primary btn-lg" id="playagain">
+            Play again?
+        </button>
     </div>
+    <!--Right image area, always half screen-->
     <div class="container col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
         <h2 class="center" id="whosthatpokemon">
             Who's that pokemon?
         </h2>
         <div>
-            <img src="assets/images/whosthatpokemon.png" class="img-responsive" id="pokemonimg">
+            <img src="assets/images/whosthatpokemon.gif" class="img-responsive" id="pokemonimg">
         </div>
     </div>
+    <!--Bottom text area, always full width-->
     <div class="container col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <h3 id="lettersGuessed"></h3>
+        <h3 id="lettersGuessed">Letters guessed: </h3>
     </div>
-    <div>
+
+    <!--Music auto plays on loop, no controls shown.-->
+    <div id="audio">
         <audio autoplay loop>
-            <source src="assets/music/game.mp3" type="audio/mpeg" id="audio">
+            <source src="assets/music/game.mp3" type="audio/mpeg">
+            <!--The following displays if the audio element is not supported-->
             Your browser does not support the audio element.
         </audio>
     </div>

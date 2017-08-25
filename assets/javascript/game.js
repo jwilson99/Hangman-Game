@@ -38,6 +38,12 @@ window.onload = function() {
 
     //shows letters guessed
     document.getElementById("lettersGuessed").innerHTML = "Letters guessed: " + letterGuess;
+
+    //shows who's that pokemon? header
+    document.getElementById("whosthatpokemon").innerHTML = "Who's that pokemon?";
+
+    //hide play again button
+    // document.getElementById("playagain").style.visibility = 'hidden';
 }
 
 //function runs when user presses a key
@@ -86,10 +92,11 @@ document.onkeyup = function(event) {
             }
         }
     }
-    //game over function for both wins and losses
-    function gameOver() {
-        //replaces pokemon image with an image of the last pokemon
-        document.getElementById('pokemonimg').src = "assets/images/"+answer+".png";
+
+    //button function
+    document.getElementById("playagain").onclick = function() {
+        //resets music
+        document.getElementById("audio").innerHTML = "<audio autoplay> <source src='assets/music/game.mp3' type='audio/mpeg'></audio>";
 
         //resets the random pokemon selection for the next round after win or loss
         answer = pokemon[Math.floor(Math.random()*pokemon.length)];
@@ -108,6 +115,21 @@ document.onkeyup = function(event) {
         guesses = 12;
 
         document.getElementById("guessCount").innerHTML = "Guesses left: " + guesses;
+
+        //hide button
+        document.getElementById("playagain").style.visibility = 'hidden';
+
+        //replaces pokemon image with who's that pokemon
+        document.getElementById('pokemonimg').src = "assets/images/whosthatpokemon.gif";
+    }
+
+    //game over function for both wins and losses
+    function gameOver() {
+        //replaces pokemon image with an image of the last pokemon
+        document.getElementById('pokemonimg').src = "assets/images/"+answer+".png";
+
+        //show button
+        document.getElementById("playagain").style.visibility = 'visible';
     }
 
     //checks to see if the answer has been fully guessed by comparing the underscore value to the answer
@@ -121,6 +143,9 @@ document.onkeyup = function(event) {
         //announces a win with the answer
         document.getElementById("whosthatpokemon").innerHTML = "You win! It's " + answer.toUpperCase()+"!";
 
+        //win music
+        document.getElementById("audio").innerHTML = "<audio autoplay> <source src='assets/music/win.mp3' type='audio/mpeg'></audio>";
+
         //game reset
         gameOver();
 
@@ -133,6 +158,9 @@ document.onkeyup = function(event) {
 
         //announces a loss with the answer
         document.getElementById("whosthatpokemon").innerHTML = "You lose! It's " + answer.toUpperCase()+"!";
+
+        //lose music
+        document.getElementById("audio").innerHTML = "<audio autoplay> <source src='assets/music/lose.mp3' type='audio/mpeg'></audio>";
 
         //game reset
         gameOver()
