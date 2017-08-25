@@ -8,7 +8,7 @@ var alphabet = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H',
 var pokemon = ['bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon', 'charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raticate', 'spearow', 'fearow', 'ekans', 'arbok', 'pikachu', 'raichu', 'sandshrew', 'sandslash', 'nidoran', 'nidorina', 'nidoqueen', 'nidorino', 'nidoking', 'clefairy', 'clefable', 'vulpix', 'ninetales', 'jigglypuff', 'wigglytuff', 'zubat', 'golbat', 'oddish', 'gloom', 'vileplume', 'paras', 'parasect', 'venonat', 'venomoth', 'diglett', 'dugtrio', 'meowth', 'persian', 'psyduck', 'golduck', 'mankey', 'primeape', 'growlithe', 'arcanine', 'poliwag', 'poliwhirl', 'poliwrath', 'abra', 'kadabra', 'alakazam', 'machop', 'machoke', 'machamp', 'bellsprout', 'weepinbell', 'victreebell', 'tentacool', 'tentacruel', 'geodude', 'graveler', 'golem', 'ponyta', 'rapidash', 'slowpoke', 'slowbro', 'magnemite', 'magneton', 'farfetchd', 'doduo', 'dodrio', 'seel', 'dewgong', 'grimer', 'muk', 'shellder', 'cloyster', 'gastly', 'haunter', 'gengar', 'onix', 'drowsee', 'hypno', 'krabby', 'kingler', 'voltorb', 'electrode', 'exeggcute', 'exeggutor', 'cubone', 'marowak', 'hitmonlee', 'hitmonchan', 'lickitung', 'koffing', 'weezing', 'rhyhorn', 'rhydon', 'chansey', 'tangela', 'kangaskhan', 'horsea', 'seadra', 'goldeen', 'seaking', 'staryu', 'starmie', 'mrmime', 'scyther', 'jynx', 'electabuzz', 'magmar', 'pinsir', 'tauros', 'magikarp', 'gyarados', 'lapras', 'ditto', 'eevee', 'vaporeon', 'jolteon', 'flareon', 'porygon', 'omanyte', 'omastar', 'kabuto', 'kabutops', 'aerodactyl', 'snorlax', 'articuno', 'zapdos', 'moltres', 'dratini', 'dragonair', 'dragonite', 'mewtwo', 'mew'];
 
 //guesses left
-var guesses = 12;
+var guesses = 10;
 
 //number of wins
 var wins = 0;
@@ -46,7 +46,7 @@ window.onload = function() {
 //function runs when user presses a key
 document.onkeyup = function(event) {
     if (guesses === 0 || underscore.join('') === answer){
-    //    nothing
+    //    prevents guessing after game end
     }
     else {
         //userGuess is recorded based on key pressed
@@ -113,7 +113,7 @@ document.onkeyup = function(event) {
         document.getElementById("lettersGuessed").innerHTML = "Letters guessed: " + letterGuess;
 
         //resets guesses after a win or loss
-        guesses = 12;
+        guesses = 10;
 
         document.getElementById("guessCount").innerHTML = "Guesses left: " + guesses;
 
@@ -136,9 +136,6 @@ document.onkeyup = function(event) {
         underscore = "_ _ _ _ _";
 
         document.getElementById("answer").innerHTML = underscore.join(' ');
-
-        //remove key event listener
-        document.onkeyup = null;
     }
 
     //checks to see if the answer has been fully guessed by comparing the underscore value to the answer
@@ -175,9 +172,3 @@ document.onkeyup = function(event) {
         gameOver()
     }
 }
-
-
-//show user guess
-//lower guesses number
-
-//if user guess matches a character in the pokemon name,
